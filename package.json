@@ -1,0 +1,24 @@
+{
+  "name": "gloacademywebpack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IvanRazbegaev85/WebPack.git"
+  },
+  "author": "Ivan Razbegaev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IvanRazbegaev85/WebPack/issues"
+  },
+  "homepage": "https://github.com/IvanRazbegaev85/WebPack#readme",
+  "devDependencies": {
+    "webpack": "^5.60.0",
+    "webpack-cli": "^4.9.1"
+  }
+}
