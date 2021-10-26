@@ -12,25 +12,34 @@ const timer = function (deadline) {
         let minutes = Math.floor((timeRemaining/60) % 60);
         let seconds = Math.floor(timeRemaining % 60);
 
-        return {
-            timeRemaining,
-            hours,
-            minutes,
-            seconds
+        if (dateStop < dateNow){
+            return {
+                timeRemaining: 0,
+                hours: `00`,
+                minutes: `00`,
+                seconds: `00`
+            }
+        } else {
+            return {
+                timeRemaining,
+                hours,
+                minutes,
+                seconds
+            }
         }
     };
 
     const updateClock = () => {
         let getTime = getTimeRemaining()
-        timerHours.textContent = getTime.hours;
-        timerMinutes.textContent = getTime.minutes;
-        timerSeconds.textContent = getTime.seconds;
-        if (getTime.timeRemaining > 0){
-            setTimeout(updateClock, 1000);
-        }
+        timerHours.textContent = ('0' + getTime.hours).slice(-2);
+        timerMinutes.textContent = ('0' + getTime.minutes).slice(-2);
+        timerSeconds.textContent = ('0' + getTime.seconds).slice(-2);
 
+        if (getTime.timeRemaining <= 0){
+            clearInterval(intervalID)
+        }
     };
-    updateClock()
+    const intervalID = setInterval(updateClock, 1000);
 }
 
 export default timer;
