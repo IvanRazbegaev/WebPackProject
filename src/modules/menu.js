@@ -8,12 +8,7 @@ const menu = function () {
     const serviceBlock = document.querySelector('#service-block');
 
     const handleMenu = () => {
-
         menu.classList.toggle('active-menu');
-    }
-
-    const handleButtonClick = () => {
-        serviceBlock.scrollIntoView({block:"center", behavior: "smooth"});
     }
 
     menuBtn.addEventListener('click', handleMenu);
@@ -21,12 +16,18 @@ const menu = function () {
     closeMenu.addEventListener('click', handleMenu);
 
     menuItems.forEach(value => {
-      value.addEventListener('click', handleMenu);
+        value.addEventListener('click', (e) => {
+            const href = document.querySelector(value.getAttribute("href"));
+            handleMenu();
+            e.preventDefault();
+            href.scrollIntoView({block:"center", behavior: "smooth"})
+        })
     })
     linkBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        handleButtonClick()
+        serviceBlock.scrollIntoView({block:"center", behavior: "smooth"});
     });
+
 }
 
 export default menu;
