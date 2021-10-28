@@ -3,9 +3,8 @@ const modal = () => {
     const modal = document.querySelector('.popup');
     const modalCloseBtn = modal.querySelector('.popup-close');
     const screenWidth = document.documentElement.offsetWidth;
-    const linkBtn = document.querySelector('main>a');
-    const serviceBlock = document.querySelector('#service-block');
-    console.log(serviceBlock);
+    let idInterval;
+    let count = 0;
 
     const handleModal = () => {
         if (!modal.style.display){
@@ -22,30 +21,20 @@ const modal = () => {
     };
 
     const modalShowUp = () => {
-        let count = 0;
-        const intervalId = setInterval(() => {
-            count += 5
-            if (count <= 100){
-                modal.style.transform = `translateX(${100 - count}%)`
-            } else {
-                clearInterval(intervalId);
-                modal.style.display = 'block'
-            }
-        }, 30)
-    };
-
-    const handleButtonClick = () => {
-        serviceBlock.scrollIntoView({block:"center", behavior: "smooth"});
+        count += 5
+        idInterval = requestAnimationFrame(modalShowUp);
+        if (count <= 100){
+            modal.style.transform = `translateX(${100 - count}%)`
+        } else {
+            cancelAnimationFrame(idInterval);
+            modal.style.display = 'block'
+        }
     }
-
 
     btnsList.forEach(value => value.addEventListener('click', handleModal));
 
     modalCloseBtn.addEventListener('click', handleModal);
-    linkBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        handleButtonClick()
-    });
+
 }
 
 export default modal;
