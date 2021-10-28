@@ -8,17 +8,19 @@ const modal = () => {
 
     const handleModal = () => {
         if (!modal.style.display){
-            modal.style.transform = 'translateX(-100%)';
+            modal.style.transform = 'translateX(100%)';
             modal.style.display = 'block';
             if(screenWidth >= 738){
                 modalShowUp();
             } else {
-                modal.style.transform = 'translateX(0)';
+                modal.style.transform = 'translateX(0%)';
             }
         } else {
             modal.style.display = '';
         }
     };
+
+    // const testEmail = /[\-\.\w]+@([\w]+\.)+[\.]+/gi
 
     const modalShowUp = () => {
         count += 5
@@ -28,6 +30,7 @@ const modal = () => {
         } else {
             cancelAnimationFrame(idInterval);
             modal.style.display = 'block'
+            count = 0;
         }
     }
 
