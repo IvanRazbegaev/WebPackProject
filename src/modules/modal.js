@@ -5,6 +5,9 @@ const modal = () => {
     const screenWidth = document.documentElement.offsetWidth;
     console.log(screenWidth);
 
+    let idInterval;
+    let count = 0;
+
     const handleModal = () => {
         if (!modal.style.display){
             modal.style.transform = 'translateX(-100%)';
@@ -21,16 +24,14 @@ const modal = () => {
     };
 
     const modalShowUp = () => {
-        let count = 0;
-        const intervalId = setInterval(() => {
-            count += 5
+        count += 5
+        idInterval = requestAnimationFrame(modalShowUp);
             if (count <= 100){
                 modal.style.transform = `translateX(${100 - count}%)`
             } else {
-                clearInterval(intervalId);
+                cancelAnimationFrame(idInterval);
                 modal.style.display = 'block'
             }
-        }, 30)
     }
 
     btnsList.forEach(value => value.addEventListener('click', handleModal));
