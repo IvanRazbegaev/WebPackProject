@@ -31,7 +31,11 @@ const timer = function (deadline) {
 
     const updateClock = () => {
         let getTime = getTimeRemaining()
-        timerHours.textContent = ('0' + getTime.hours).slice(-2);
+        if(getTime.hours.length == 1){
+            timerHours.textContent = ('0' + getTime.hours).slice(-2);
+        } else {
+            timerHours.textContent = getTime.hours
+        }
         timerMinutes.textContent = ('0' + getTime.minutes).slice(-2);
         timerSeconds.textContent = ('0' + getTime.seconds).slice(-2);
 

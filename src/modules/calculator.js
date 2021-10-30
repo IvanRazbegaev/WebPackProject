@@ -6,7 +6,6 @@ const calculator = () => {
       e.target.value = e.target.value.replace(/\D+/g, '');
     })
   })
-  console.log(calcInputItems);
 }
 
 export default calculator
