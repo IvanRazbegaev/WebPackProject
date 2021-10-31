@@ -52,7 +52,7 @@ const mainPage = () => {
   }
 
   const capitalizeFirstLetter = (event) => {
-    return event.target.value.replace(event.target.value[0], event.target.value[0].toUpperCase());
+    return event.target.value.replace(/(^|\s)\S/g, function(match) {return match.toUpperCase()});
   }
   const spaceReplacer = (event) => {
     return event.target.value.replace(/\s+/g, ' ');
@@ -64,7 +64,7 @@ const mainPage = () => {
 
   const spaceStrikeDeleter = (event) => {
     let strWithoutSpaces = spaceReplacer(event).trim();
-    let cleanStr = strWithoutSpaces.replace(/^-+/g, '').trim();
+    let cleanStr = strWithoutSpaces.replace(/[^-].-$/g, '').trim();
     return cleanStr;
   }
 
