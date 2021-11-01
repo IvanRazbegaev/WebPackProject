@@ -1,7 +1,6 @@
 const modal = () => {
     const btnsList = document.querySelectorAll('.popup-btn');
     const modal = document.querySelector('.popup');
-    const modalCloseBtn = modal.querySelector('.popup-close');
     const screenWidth = document.documentElement.offsetWidth;
     let idInterval;
     let count = 0;
@@ -20,8 +19,6 @@ const modal = () => {
         }
     };
 
-    // const testEmail = /[\-\.\w]+@([\w]+\.)+[\.]+/gi
-
     const modalShowUp = () => {
         count += 5
         idInterval = requestAnimationFrame(modalShowUp);
@@ -33,10 +30,13 @@ const modal = () => {
             count = 0;
         }
     }
-
     btnsList.forEach(value => value.addEventListener('click', handleModal));
 
-    modalCloseBtn.addEventListener('click', handleModal);
+    modal.addEventListener('click', (e) => {
+        if(!e.target.closest('.popup-content') || e.target.classList.contains("popup-close")){
+            modal.style.display = ''
+        }
+    })
 
 }
 
