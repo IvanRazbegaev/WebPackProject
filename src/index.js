@@ -5,6 +5,7 @@ import calculator from "./modules/calculator";
 import mainPage from "./modules/mainPage";
 import sliderSwiper from "./modules/sliderSwiper";
 import tabs from "./modules/tabs"
+import slider from "./modules/slider";
 
 timer('30 november 2021');
 menu();
@@ -13,3 +14,4 @@ calculator();
 mainPage();
 sliderSwiper();
 tabs();
+slider();
