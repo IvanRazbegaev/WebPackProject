@@ -1,4 +1,4 @@
-const slider = () => {
+const slider = (sliderClass) => {
 
     const sliderBlock = document.querySelector('.portfolio-content');
     const slides = document.querySelectorAll('.portfolio-item');
