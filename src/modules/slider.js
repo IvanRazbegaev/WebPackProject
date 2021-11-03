@@ -9,7 +9,6 @@ const slider = (sliderClass) => {
     let timeInterval = 2000;
     let currentSlide = 0;
 
-    console.log(portfolioList);
 
     sliderItems.forEach((item, index) => {
 
