@@ -7,6 +7,8 @@ const calculator = (price = 100) => {
   const calcDay = document.querySelector('.calc-day');
   const total = document.getElementById('total');
 
+  let count = 0;
+
   calcInputItems.forEach(value => {
     value.addEventListener('input',(e) => {
       e.target.value = e.target.value.replace(/\D+/g, '');
@@ -36,7 +38,18 @@ const calculator = (price = 100) => {
     } else {
       totalValue = 0;
     }
-    total.textContent = totalValue;
+
+    requestAnimationFrame(function increaseTotalValue() {
+      total.textContent = count;
+      count += totalValue/10;
+      if(count <= totalValue){
+        requestAnimationFrame(increaseTotalValue)
+      } else {
+        count = 0;
+      }
+    })
+
+    // total.textContent = totalValue;
   }
 
   calcBlock.addEventListener('input', (e) => {
