@@ -1,17 +1,19 @@
-const slider = () => {
+const slider = (sliderBlockClass, dotBlockClass, slidesClass) => {
 
-    const sliderBlock = document.querySelector('.portfolio-content');
-    const slides = document.querySelectorAll('.portfolio-item');
+    const sliderBlock = document.querySelector(sliderBlockClass);
+    const slides = document.querySelectorAll(slidesClass);
+    const portfolioList = document.querySelector(dotBlockClass);
+
     let dots = document.querySelectorAll('.dot');
-    const sliderItems = document.querySelectorAll('.portfolio-item');
-    const portfolioList = document.querySelector('.portfolio-dots')
     let intervalID;
     let timeInterval = 2000;
     let currentSlide = 0;
 
-    console.log(portfolioList);
+    if(sliderBlock === null || slides === null || portfolioList === null ){
+        return;
+    }
 
-    sliderItems.forEach((item, index) => {
+    slides.forEach((item, index) => {
 
         let dot = document.createElement('li');
         dot.classList.add('dot');

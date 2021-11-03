@@ -14,4 +14,4 @@ calculator();
 mainPage();
 sliderSwiper();
 tabs();
-slider();
+slider('.portfolio-content', '.portfolio-dots', '.portfolio-item');
