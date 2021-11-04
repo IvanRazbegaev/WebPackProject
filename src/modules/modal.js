@@ -29,19 +29,6 @@ const modal = () => {
         }
     };
 
-
-    const modalShowUp = () => {
-        count += 5
-        idInterval = requestAnimationFrame(modalShowUp);
-        if (count <= 100){
-            modal.style.transform = `translateX(${100 - count}%)`
-        } else {
-            cancelAnimationFrame(idInterval);
-            modal.style.display = 'block'
-            count = 0;
-        }
-    }
-
     btnsList.forEach(value => value.addEventListener('click', handleModal));
 
     modalCloseBtn.addEventListener('click', handleModal);
