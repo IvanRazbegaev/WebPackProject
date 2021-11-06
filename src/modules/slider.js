@@ -1,4 +1,4 @@
-const slider = (sliderBlockClass, dotBlockClass, slidesClass, defaultDotClass, defaultSlideClass) => {
+const slider = (sliderBlockClass, dotBlockClass, slidesClass, defaultDotClass = 'dot-active', defaultSlideClass = 'portfolio-item-active') => {
 
     const sliderBlock = document.querySelector(sliderBlockClass);
     const slides = document.querySelectorAll(slidesClass);
