@@ -1,7 +1,6 @@
 const sendForm = ({formId, someElement = []}) => {
     const form = document.getElementById(formId);
     const statusBlock = document.createElement('div');
-    const loadText = 'Загрузка...';
     const errorText = 'Ошибка';
     const successText = 'Спасибо! Наш менеджер с Вами свяжется';
 
@@ -29,6 +28,9 @@ const sendForm = ({formId, someElement = []}) => {
 
     const spinLoader = (state, bouncers = 3) => {
         const spinner = document.createElement('div');
+
+        statusBlock.id = 'status';
+        statusBlock.style.color = 'white';
 
       if (state === 'start'){
           for (let i = 1; i <= bouncers; i++){
