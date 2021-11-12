@@ -1,7 +1,7 @@
 const sendForm = ({formId, someElement = []}) => {
     const form = document.getElementById(formId);
     const statusBlock = document.createElement('div');
-    const loaText = 'Загрузка...';
+    const loadText = 'Загрузка...';
     const errorText = 'Ошибка';
     const successText = 'Спасибо! Наш менеджер с Вами свяжется';
 
@@ -14,11 +14,9 @@ const sendForm = ({formId, someElement = []}) => {
             if (value.name === 'user_phone'){
                 let pattern = /[\d\+]/gi;
                 phone = pattern.test(value.value);
-                console.log(phone)
             } else if (value.name === 'user_name') {
                 let pattern = /[а-яё\s]/gi;
                 name = pattern.test(value.value);
-                console.log(name)
             }
             else if (value.name === 'user_message') {
                 let pattern = /[а-я\d\s!?,.;:]/gi;
@@ -27,6 +25,23 @@ const sendForm = ({formId, someElement = []}) => {
         })
 
         return phone && name && message;
+    }
+
+    const spinLoader = (state, bouncers = 3) => {
+        const spinner = document.createElement('div');
+
+      if (state === 'start'){
+          for (let i = 1; i <= bouncers; i++){
+              const bouncer = document.createElement('div');
+              bouncer.classList.add(`bounce${i}`);
+              spinner.append(bouncer);
+          }
+          spinner.classList.add('spinner');
+          statusBlock.append(spinner);
+      } else if (state === 'stop'){
+        const spinnerElem = document.querySelector('.spinner');
+        spinnerElem.remove();
+      }
     }
 
     const sendData = (data) => {
@@ -44,8 +59,8 @@ const sendForm = ({formId, someElement = []}) => {
         const formElements = form.querySelectorAll('input')
         const formBody = {};
 
-        statusBlock.textContent = loaText;
-        form.append(statusBlock)
+        spinLoader('start');
+        form.insertAdjacentElement('beforeend',statusBlock);
 
         formData.forEach((value, key) => {
             formBody[key] = value
@@ -62,16 +77,25 @@ const sendForm = ({formId, someElement = []}) => {
 
         if (validate(formElements)) {
             sendData(formBody).then(data => {
+                spinLoader('stop')
                 statusBlock.textContent = successText
+                setTimeout(() => {
+                    statusBlock.textContent = ''
+                }, 3000)
                 formElements.forEach(input => {
                     input.value = '';
                 })
             }).catch( error => {
+                spinLoader('stop')
                 statusBlock.textContent = errorText;
+                setTimeout(() => {
+                    statusBlock.textContent = ''
+                }, 3000)
                 console.log(error)
             })
         } else alert('Данные не валидны!')
     }
+
     try {
 
         if(!form){
