@@ -3,27 +3,33 @@ const sendForm = ({formId, someElement = []}) => {
     const statusBlock = document.createElement('div');
     const errorText = 'Ошибка';
     const successText = 'Спасибо! Наш менеджер с Вами свяжется';
+    let alertMessage = 'Данные не валидны!';
 
     const validate = (list) => {
         let phone = true;
         let name = true;
-        let message = true;
+        let email = true;
 
         list.forEach(value => {
             if (value.name === 'user_phone'){
-                let pattern = /[\d\+]/gi;
-                phone = pattern.test(value.value);
+                if(value.value.length < 11){
+                    alertMessage = 'Телефонный номер не может быть менее 11 символов!';
+                    phone = false;
+                }
             } else if (value.name === 'user_name') {
-                let pattern = /[а-яё\s]/gi;
-                name = pattern.test(value.value);
-            }
-            else if (value.name === 'user_message') {
-                let pattern = /[а-я\d\s!?,.;:]/gi;
-                message = pattern.test(value.value);
+                if(value.value.length < 2){
+                    alertMessage = 'Имя не может быть менее 2ух символов!';
+                    name = false;
+                }
+            } else if (value.name === 'user_email'){
+                if(value.value === ''){
+                    email = false;
+                    alertMessage = 'Поле "E-mail" является обязательным. заполните его!';
+                }
             }
         })
 
-        return phone && name && message;
+        return phone && name && email;
     }
 
     const spinLoader = (state, bouncers = 3) => {
@@ -57,8 +63,8 @@ const sendForm = ({formId, someElement = []}) => {
     }
     
     const submitForm = () => {
-        const formData = new FormData (form)
-        const formElements = form.querySelectorAll('input')
+        const formData = new FormData (form);
+        const formElements = form.querySelectorAll('input');
         const formBody = {};
 
         spinLoader('start');
@@ -95,7 +101,10 @@ const sendForm = ({formId, someElement = []}) => {
                 }, 3000)
                 console.log(error)
             })
-        } else alert('Данные не валидны!')
+        } else {
+            spinLoader('stop')
+            alert(alertMessage)
+        }
     }
 
     try {
