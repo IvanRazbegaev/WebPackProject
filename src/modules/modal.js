@@ -5,11 +5,10 @@ const modal = () => {
     const modal = document.querySelector('.popup');
     const modalCloseBtn = modal.querySelector('.popup-close');
     const screenWidth = document.documentElement.offsetWidth;
-    let idInterval;
-    let count = 0;
 
     const handleModal = () => {
         if (!modal.style.display){
+            modal.style.backgroundColor = 'rgba(229,229,229, 0)';
             modal.style.transform = 'translateX(100%)';
             modal.style.display = 'block';
             if(screenWidth >= 738){

@@ -43,6 +43,7 @@ const timer = function (deadline) {
             clearInterval(intervalID)
         }
     };
+    updateClock();
     const intervalID = setInterval(updateClock, 1000);
 }
 

@@ -22,9 +22,15 @@ const sendForm = ({formId, someElement = []}) => {
                     name = false;
                 }
             } else if (value.name === 'user_email'){
+                const pattern = /[a-z]+@[a-z]+[.][a-z]+/gi;
                 if(value.value === ''){
                     email = false;
                     alertMessage = 'Поле "E-mail" является обязательным. заполните его!';
+                }
+                console.log(value.value)
+                if (!pattern.test(value.value)){
+                    email = false;
+                    alertMessage = 'Поле "E-mail" должно быть формата "example@example.com"'
                 }
             }
         })
